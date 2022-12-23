@@ -15,13 +15,14 @@
             }
             
             function connect() {
-                var socket = new SockJS('ws://127.0.0.1:8090/gs-guide-websocket');
+                var socket = new SockJS('ws://localhost:8090/chat/');
                 stompClient = Stomp.over(socket);  
                 stompClient.connect({}, function(frame) {
                     setConnected(true);
                     console.log('Connected: ' + frame);
-                    stompClient.subscribe('/topic/greetings', function(messageOutput) {
-                        showMessageOutput(JSON.parse(messageOutput.body));
+                    stompClient.subscribe('/topic/messages', function(messageOutput) {
+                        // showMessageOutput(JSON.parse(messageOutput.body));
+                        console.log(messageOutput)
                     });
                 });
             }
