@@ -18,11 +18,11 @@
       }
       
       function connectWebsocket() {
-          var socket = new SockJS('http://127.0.0.1:8090/chat-info');
+          var socket = new SockJS('http://localhost:8090/chat-info');
           stompClient = Stomp.over(socket);  
           stompClient.connect({}, function() {
               console.log('Connected');
-              stompClient.subscribe('http://127.0.0.1:8090/topic/messages', function(messageOutput) {
+              stompClient.subscribe('/topic/messages', function(messageOutput) {
                 console.log("Data: "+messageOutput)
                 //   showMessageOutput(JSON.parse(messageOutput.body));
               });
