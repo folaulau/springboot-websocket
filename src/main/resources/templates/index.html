@@ -11,30 +11,31 @@
     <script src="/sockjs.js"></script>
     <script src="/stomp.js"></script>
     <script type="text/javascript">
-      var stompClient = null;
-      
-      function setConnected(connected) {
-      }
-      
-      function connectWebsocket() {
-          var socket = new SockJS('/chat-info');
-          stompClient = Stomp.over(socket);  
-          stompClient.connect({}, function(frame) {
-              setConnected(true);
-              console.log('Connected: ' + frame);
-              stompClient.subscribe('/topic/messages', function(messageOutput) {
+      var messages = []
+	  var stompClient = null;
+	  
+	  function setConnected(connected) {
+	  }
+	  
+	  function connectWebsocket() {
+	      var socket = new SockJS('/chat-info');
+	      stompClient = Stomp.over(socket);  
+	      stompClient.connect({}, function(frame) {
+	          setConnected(true);
+	          console.log('Connected: ' + frame);
+	          stompClient.subscribe('/topic/messages', function(messageOutput) {
 					console.log("data: "+messageOutput)
-              });
-          });
-      }
-      
-      function disconnectWebsocket() {
-          if(stompClient != null) {
-              stompClient.disconnect();
-          }
-          setConnected(false);
-          console.log("Disconnected");
-      }
+	          });
+	      });
+	  }
+	  
+	  function disconnectWebsocket() {
+	      if(stompClient != null) {
+	          stompClient.disconnect();
+	      }
+	      setConnected(false);
+	      console.log("Disconnected");
+	  }
   </script>
 </head>
 <body>
