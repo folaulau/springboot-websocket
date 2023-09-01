@@ -37,10 +37,10 @@ public class UserDataLoaderService {
                     .id(Long.valueOf(""+i))
                     .firstName(firstName)
                     .lastName(lastName)
-                    .dob(LocalDate.of(RandomGeneratorUtils.getIntegerWithin(1880,2010),RandomGeneratorUtils.getIntegerWithin(1,12),RandomGeneratorUtils.getIntegerWithin(1,27)))
+                    //.dob(LocalDate.of(RandomGeneratorUtils.getIntegerWithin(1880,2010),RandomGeneratorUtils.getIntegerWithin(1,12),RandomGeneratorUtils.getIntegerWithin(1,27)))
                     .email((firstName+lastName).toLowerCase()+"@gmail.com")
-                    .phoneNumber(RandomGeneratorUtils.getRandomPhone())
-                    .address(address)
+                    //.phoneNumber(RandomGeneratorUtils.getRandomPhone())
+                   // .address(address)
                     .build();
 
             address.setUser(user);
@@ -64,10 +64,10 @@ public class UserDataLoaderService {
                 .id(1L)
                 .firstName("Folau")
                 .lastName("Kaveinga")
-                .dob(LocalDate.of(1986,12,03))
+                //.dob(LocalDate.of(1986,12,03))
                 .email("folaukaveinga@gmail.com")
-                .phoneNumber("3109934731")
-                .address(address)
+//                .phoneNumber("3109934731")
+//                .address(address)
                 .build();
 
         address.setUser(folau);
@@ -78,10 +78,10 @@ public class UserDataLoaderService {
                 .id(2L)
                 .firstName("Lisa")
                 .lastName("Kaveinga")
-                .dob(LocalDate.of(1987,04,12))
+                //.dob(LocalDate.of(1987,04,12))
                 .email("lisakaveinga@gmail.com")
-                .phoneNumber("3439934731")
-                .address(address)
+//                .phoneNumber("3439934731")
+//                .address(address)
                 .build();
 
         address.setUser(lisa);

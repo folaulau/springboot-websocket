@@ -10,7 +10,9 @@ import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import com.folautech.websocket.dto.MessageDTO;
 import com.folautech.websocket.message.Message;
@@ -36,6 +38,7 @@ public class ChatController {
 //              .build();
 //    }
     
+//    @CrossOrigin(origins = "http://localhost:5500")
     @MessageMapping("/chat/info")
 //    @SendTo("/topic/messages")
     public void chat(@Payload MessageDTO message) throws Exception {

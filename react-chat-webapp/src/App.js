@@ -3,17 +3,26 @@ import useWebSocket, { ReadyState } from 'react-use-websocket';
 
 function App() {
 
-  const [socketUrl, setSocketUrl] = useState('wss://127.0.0.1:8090/chat');
-  const [messages, setMessages] = useState([]);
+  //const [socketUrl, setSocketUrl] = useState('http://127.0.0.1:8090/topic/messages');
+  const [socketUrl, setSocketUrl] = useState('wss://ws.postman-echo.com/raw');
+  const [messageHistory, setMessageHistory] = useState([]);
 
-  const { sendMessage, lastMessage, readyState } = useWebSocket(socketUrl);
+  const { lastMessage, readyState } = useWebSocket(socketUrl)
+
+  useWebSocket(socketUrl, {
+    onOpen: () => {
+      console.log('WebSocket connection established.');
+    },
+    onMessage: (msg) =>{
+      console.log('WebSocket msg.'+msg);
+    }
+  });
 
   useEffect(() => {
     if (lastMessage !== null) {
-      setMessages((prev) => prev.concat(lastMessage));
+      setMessageHistory((prev) => prev.concat(lastMessage));
     }
-  }, [lastMessage, setMessages]);
-
+  }, [lastMessage, setMessageHistory]);
 
   const connectionStatus = {
     [ReadyState.CONNECTING]: 'Connecting',
@@ -24,19 +33,17 @@ function App() {
   }[readyState];
 
   return (
-    <div className="App">
-      <header className="App-header">
-        
-          Learn React
-
-          <ul>
-            {messages.map((message, idx) => (
-              <span key={idx}>{message ? message.message : null}</span>
-            ))}
-          </ul>
-      </header>
+    <div>
+      <span>The WebSocket is currently {connectionStatus}</span>
+      <br/>
+      <span>Last message: {lastMessage}</span>
+      <ul>
+        {messageHistory.map((message, idx) => (
+          <span key={idx}>{message ? message.data : null}</span>
+        ))}
+      </ul>
     </div>
   );
-}
+};
 
 export default App;

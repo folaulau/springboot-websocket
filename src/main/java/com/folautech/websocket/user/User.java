@@ -17,19 +17,16 @@ import java.util.UUID;
 
 @Builder
 @Data
-@RequiredArgsConstructor
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonInclude(value = Include.NON_NULL)
 @DynamicUpdate
 @Entity
-@SQLDelete(sql = "UPDATE user SET deleted = 'T' WHERE id = ?", check = ResultCheckStyle.NONE)
-@Where(clause = "deleted = 'F'")
-@Table(name = "users", indexes = {@Index(columnList = "uuid"), @Index(columnList = "email"), @Index(columnList = "phone_number"), @Index(columnList = "deleted")})
+@Table(name = "users", indexes = {@Index(columnList = "uuid")})
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @NonNull
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, updatable = false, unique = true)
@@ -46,27 +43,6 @@ public class User implements Serializable {
 
     @Column(name = "email", unique = true)
     private String email;
-
-    @Column(name = "phone_number")
-    private String phoneNumber;
-
-    @Column(name = "dob")
-    private LocalDate dob;
-
-    @Column(name = "deleted", nullable = false)
-    private boolean deleted;
-
-    @JsonIgnoreProperties(value = {"user"})
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
-    private Address address;
-
-    @CreationTimestamp
-    @Column(name = "created_at", nullable = false, updatable = false)
-    private LocalDateTime createdAt;
-
-    @UpdateTimestamp
-    @Column(name = "updated_at", nullable = false)
-    private LocalDateTime updatedAt;
 
 
     @PrePersist
