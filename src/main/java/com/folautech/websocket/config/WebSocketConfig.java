@@ -17,7 +17,7 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
 @Configuration
 @EnableWebSocket
 @EnableWebSocketMessageBroker
-public class WebSocketConfig implements WebSocketMessageBrokerConfigurer, WebSocketConfigurer {
+public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {//implements WebSocketConfigurer
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry config) {
@@ -28,16 +28,16 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer, WebSoc
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
 //        registry.addEndpoint("/chat-info").setAllowedOrigins("http://127.0.0.1:5500", "http://localhost:3000");
-        registry.addEndpoint("/chat-info").setAllowedOrigins("http://127.0.0.1:5500", "http://localhost:3000").withSockJS();
-        registry.addEndpoint("/chatwithbots");
-        registry.addEndpoint("/chatwithbots").withSockJS();
+        registry.addEndpoint("/chat-info")
+        .setAllowedOrigins("http://127.0.0.1:5500", "http://localhost:3000")
+        .withSockJS();
     }
 
-    @Override
-    public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        registry.addHandler(textHandler(), "/chat-info").setAllowedOrigins("*");
-        
-    }
+//    @Override
+//    public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
+//        registry.addHandler(textHandler(), "/chat-info").setAllowedOrigins("*");
+//        
+//    }
 
     @Bean
     public TextHandler textHandler() {
