@@ -1,46 +1,28 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import useWebSocket, { ReadyState } from 'react-use-websocket';
+import { Client } from '@stomp/stompjs';
+import SockJS from 'sockjs-client';
 import SockJsClient from 'react-stomp';
+// import SockJS from 'sockjs-client';
+import { Stomp } from 'stompjs';
 
 function App() {
 
-  // const [socketUrl, setSocketUrl] = useState('http://127.0.0.1:8090/chat-info');
-  // const [messageHistory, setMessageHistory] = useState([]);
-
-  // const { lastMessage, readyState } = useWebSocket(socketUrl)
-
-  // useWebSocket(socketUrl, {
-  //   onOpen: () => {
-  //     console.log('WebSocket connection established.');
-  //   },
-  //   onMessage: (msg) =>{
-  //     console.log('WebSocket msg.'+msg);
-  //   }
-  // });
-
-  // useEffect(() => {
-  //   if (lastMessage !== null) {
-  //     setMessageHistory((prev) => prev.concat(lastMessage));
-  //   }
-  // }, [lastMessage, setMessageHistory]);
-
-  // const connectionStatus = {
-  //   [ReadyState.CONNECTING]: 'Connecting',
-  //   [ReadyState.OPEN]: 'Open',
-  //   [ReadyState.CLOSING]: 'Closing',
-  //   [ReadyState.CLOSED]: 'Closed',
-  //   [ReadyState.UNINSTANTIATED]: 'Uninstantiated',
-  // }[readyState];
-
   return (
     <div>
-      {/* <span>The WebSocket is currently {connectionStatus}</span>
+      <span>The WebSocket is currently {`connectionStatus`}</span>
       <br/>
-      <span>Last message: {lastMessage}</span> */}
-      <div>
-      <SockJsClient url='http://localhost:8090/chat-info' topics={['/topic/messages']}
-            onMessage={(msg) => { console.log(msg); }}/>
-      </div>
+      <span>Last message: {`lastMessage`}</span>
+      <SockJsClient url='http://localhost:8090/chat-info' 
+        topics={['/topic/messages']}
+        onConnect={() => {
+          console.log("connected");
+        }}
+        onDisconnect={() => {
+            console.log("Disconnected");
+        }}
+        onMessage={(msg) => { console.log(msg); }}
+      />
     </div>
   );
 };

@@ -36,22 +36,6 @@
           setConnected(false);
           console.log("Disconnected");
       }
-      
-      function sendMessage() {
-          var from = document.getElementById('from').value;
-          var text = document.getElementById('text').value;
-          stompClient.send("/app/chat", {}, 
-            JSON.stringify({'from':from, 'text':text}));
-      }
-      
-      function showMessageOutput(messageOutput) {
-          var response = document.getElementById('response');
-          var p = document.createElement('p');
-          p.style.wordWrap = 'break-word';
-          p.appendChild(document.createTextNode(messageOutput.from + ": " 
-            + messageOutput.text + " (" + messageOutput.time + ")"));
-          response.appendChild(p);
-      }
   </script>
 </head>
 <body>

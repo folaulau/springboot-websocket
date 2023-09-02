@@ -18,11 +18,11 @@ public class RestMVCConfig {
 
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-//                registry.addMapping("/**")
-//                .allowCredentials(false)
-//                .allowedHeaders("*")
-//                .allowedMethods("*")
-//                .allowedOrigins("*");
+                registry.addMapping("/**")
+                .allowCredentials(true)
+                .allowedHeaders("*")
+                .allowedMethods("*")
+                .allowedOrigins("http://localhost:3000");
             }
 
         };
