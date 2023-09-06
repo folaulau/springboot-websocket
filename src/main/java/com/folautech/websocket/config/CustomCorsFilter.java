@@ -37,7 +37,7 @@ public class CustomCorsFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException, ServletException {
-//        log.info("CustomCorsFilter.doFilter(..)");
+        log.info("CustomCorsFilter.doFilter(..)");
         HttpServletResponse response = (HttpServletResponse) resp;
         HttpServletRequest request = (HttpServletRequest) req;
 //        log.info("METHOD={}", request.getMethod());
@@ -48,6 +48,10 @@ public class CustomCorsFilter implements Filter {
         response.setHeader("Access-Control-Allow-Credentials", "true");
         response.setHeader("Access-Control-Allow-Headers", "x-api-key, token, x-requested-with, authorization, Content-Type, Authorization, credential, X-XSRF-TOKEN");
 
+        String token = request.getParameter("token");
+        
+        log.info("token={}",token);
+        
         if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
             response.setStatus(HttpServletResponse.SC_OK);
         } else {

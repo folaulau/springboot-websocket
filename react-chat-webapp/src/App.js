@@ -4,13 +4,20 @@ import { Client } from '@stomp/stompjs';
 import SockJS from 'sockjs-client';
 import SockJsClient from 'react-stomp';
 // import SockJS from 'sockjs-client';
-import { Stomp } from 'stompjs';
+// import { Stomp } from 'stompjs';
 
 function App() {
 
   const stompClient = new Client({
-    webSocketFactory: () => new SockJS('http://localhost:8090/chat-info'),
+    webSocketFactory: () => new SockJS('http://localhost:8090/chat-info?token=test'),
   });
+  // const stompClient = new Client({
+  //   webSocketFactory: () => new SockJS('http://localhost:8090/chat-info?token=test'),
+  //   connectHeaders: {
+  //     'Authorization': 'Bearer YOUR_TOKEN_HERE',
+  //     'token': '123-abc'
+  //   }
+  // });
 
   useEffect(() => {
     // This function will be called when the component mounts
